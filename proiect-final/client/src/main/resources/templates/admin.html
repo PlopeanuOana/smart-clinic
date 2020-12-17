@@ -1,0 +1,664 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sf="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Smart Health</title>
+    <link href="css/admin_style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="js/smooth-scroll.js"></script>
+    <script>
+        var scroll= new SmoothScroll('a[href*="#"]');
+    </script>
+</head>
+<body>
+    <!-- NavigationBar-->
+    <section id="nav_bar">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#"><img src="img/logo1.jpg"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#users_work">User work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#drugs_work">Drug work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#generate_report_section">Generate report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8082/welcome">LOGOUT</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--Users work-->
+    </section>
+        <section id="users_work">
+            <div class = "container">
+                <h1>User Work</h1>
+                <input class="form-control" id="search-user" type="text" placeholder="Search..">
+                <button type="submit" class="add_btn" data-toggle="modal" data-target="#add_user">Add User</button>
+                <!-- Modal User -->
+                <div class="modal fade" id="add_user" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticUser">Add new user</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form [formGroup]="add_user" id="add_user_form" th:action="@{/add_user_form}" method="post" (ngSubmit)="onSubmit()">
+                                    <div class="form-group row">
+                                        <label for="add_user_name" class="col-sm-4 col-form-label">User's name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="name" formControlName="name" id="add_user_name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_user_username" class="col-sm-4 col-form-label">Username</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="username" formControlName="description" id="add_user_username">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_user_password" class="col-sm-4 col-form-label">Password</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="password" formControlName="price" id="add_user_password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_user_address" class="col-sm-4 col-form-label">Address</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="address" formControlName="address" id="add_user_address">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_user_phone" class="col-sm-4 col-form-label">Phone</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="phone" formControlName="phone" id="add_user_phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_user_speciality" class="col-sm-4 col-form-label">Speciality/Medical details</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="detail" formControlName="nume_dis" id="add_user_speciality">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_user_price" class="col-sm-4 col-form-label">Doctor's price</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="price" formControlName="price_doctor" id="add_user_price">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_user_role" class="col-sm-4 col-form-label">Role</label>
+                                        <div class="col-sm-8">
+                                            <select formcontrolname="role" name="role" id="add_user_role">
+                                                <option value="PATIENT">PATIENT</option>
+                                                <option value="DOCTOR">DOCTOR</option>
+                                                <option value="ADMIN">ADMIN</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="submit_add_user_form()" data-dismiss="modal">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                  <th scope="col"></th>
+                  <th scope="col">User name</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Password</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Modify</th>
+              </tr>
+              </thead>
+              <tbody id="users-table">
+              <tr th:each="user : ${users}">
+                  <td><div class="row_data_u" edit_type="click" col_name_u="user_id"><span th:text="${user.id}" hidden></span></div></td>
+                  <td><div class="row_data_u" edit_type="click" col_name_u="user_name"><span th:text="${user.name}"> Name </span></div></td>
+                  <td><div class="row_data_u" edit_type="click" col_name_u="user_username"><span th:text="${user.username}" > Username </span></div></td>
+                  <td><div class="row_data_u" edit_type="click" col_name_u="user_password"><span th:text="${user.password}"> Password </span></div></td>
+                  <td><div class="row_data_u" edit_type="click" col_name_u="user_address"><span th:text="${user.address}"> Address </span></div></td>
+                  <td><div class="row_data_u" edit_type="click" col_name_u="user_phone"><span th:text="${user.phone}"> Phone </span></div></td>
+                  <td><div class="row_data_u" edit_type="click" col_name_u="user_role"><span th:text="${user.role}"> Role </span></div></td>
+                  <td>
+                      <span class="btn_edit_u" > <a href="" class="btn btn-link " th:row_id_u="${user.id}" > Edit</a> </span>
+
+                      <span class="btn_save_u" > <a href="" class="btn btn-link " th:row_id_u="${user.id}" > Save</a> | </span>
+                      <span class="btn_delete_u" > <a href="" class="btn btn-link " th:row_id_u="${user.id}" > Delete</a> | </span>
+                      <span class="btn_cancel_u" > <a href="" class="btn btn-link " th:row_id_u="${user.id}" > Cancel</a></span>
+                  </td>
+
+              </tr>
+              </tbody>
+            </table>
+            </div>
+
+            <div style="display:none">
+                <form method="post" th:action="@{/edit_table_user}" id="MyHiddenFormUser">
+                    <input name="content" type="hidden" id="user_array_id" />
+                </form>
+            </div>
+
+            <div style="display:none">
+                <form method="post" th:action="@{/delete_table_user}" id="MyHiddenFormUserDelete">
+                    <input name="content" type="hidden" id="user_array_id_delete" />
+                </form>
+            </div>
+        <script th:inline="javascript">
+
+        function submit_add_user_form(){
+                document.getElementById("add_user_form").submit();
+            }
+            
+         function myFunction(myArray) {
+               document.getElementById("user_array_id").value = JSON.stringify(myArray);
+               document.getElementById("MyHiddenFormUser").submit();
+            }
+
+        function myFunctionDeleteUser(myArray) {
+           document.getElementById("user_array_id_delete").value = JSON.stringify(myArray);
+           document.getElementById("MyHiddenFormUserDelete").submit();
+        }
+
+        $(document).find('.btn_save_u').hide();
+        $(document).find('.btn_delete_u').hide();
+        $(document).find('.btn_cancel_u').hide();
+
+        $(document).on('click','.row_data_u', function(event){
+            event.preventDefault();
+            if($(this).attr('edit_type') == 'button')
+            {
+                return false;
+            }
+            $(this).closest('div').attr('contenteditable', 'true');
+            $(this).addClass('bg-warning').css('padding','5px');
+
+            $(this).focus();
+	    });
+
+	    $(document).on('click', '.btn_edit_u', function(event){
+            event.preventDefault();
+            var tbl_row = $(this).closest('tr');
+
+            var row_id_u = tbl_row.attr('row_id_u');
+
+            tbl_row.find('.btn_save_u').show();
+            tbl_row.find('.btn_cancel_u').show();
+            tbl_row.find('.btn_delete_u').show();
+
+            tbl_row.find('.btn_edit_u').hide();
+
+            tbl_row.find('.row_data_u')
+            .attr('contenteditable', 'true')
+            .attr('edit_type', 'button')
+            .addClass('bg-warning')
+            .css('padding','3px')
+
+            tbl_row.find('.row_data_u').each(function(index, val)
+            {
+                $(this).attr('original_entry', $(this).html());
+            });
+
+            $(document).on('click', '.btn_cancel_u', function(event)
+            {
+                event.preventDefault();
+
+                var tbl_row = $(this).closest('tr');
+
+                var row_id_u = tbl_row.attr('row_id_u');
+
+                tbl_row.find('.btn_save_u').hide();
+                tbl_row.find('.btn_cancel_u').hide();
+                tbl_row.find('.btn_delete_u').hide();
+
+                tbl_row.find('.btn_edit_u').show();
+
+                tbl_row.find('.row_data_u')
+                .attr('edit_type', 'click')
+                .removeClass('bg-warning')
+                .css('padding','')
+
+                tbl_row.find('.row_data_u').each(function(index, val)
+                {
+                    $(this).html( $(this).attr('original_entry') );
+                });
+            });
+
+            $(document).on('click', '.btn_save_u', function(event)
+            {
+                event.preventDefault();
+                var tbl_row = $(this).closest('tr');
+
+                var row_id_u = tbl_row.attr('row_id_u');
+
+                tbl_row.find('.btn_save_u').hide();
+                tbl_row.find('.btn_cancel_u').hide();
+                tbl_row.find('.btn_delete_u').hide();
+
+                //show edit button
+                tbl_row.find('.btn_edit_u').show();
+
+                tbl_row.find('.row_data_u')
+                .attr('edit_type', 'click')
+                .removeClass('bg-warning')
+                .css('padding','')
+
+                var arr = {};
+                tbl_row.find('.row_data_u').each(function(index, val)
+                {
+                    var col_name_u = $(this).attr('col_name_u');
+                    var col_val_u  =  $(this).text();
+                    arr[col_name_u] = col_val_u;
+                });
+
+                //use the "arr"	object for your ajax call
+                $.extend(arr, {row_id_u:row_id_u});
+                myFunction(arr);
+
+                //out put to show
+                $('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')
+
+            });
+
+            $(document).on('click', '.btn_delete_u', function(event)
+            {
+                event.preventDefault();
+                var tbl_row = $(this).closest('tr');
+
+                var row_id_u = tbl_row.attr('row_id_u');
+
+                tbl_row.find('.btn_save_u').hide();
+                tbl_row.find('.btn_cancel_u').hide();
+                tbl_row.find('.btn_delete_u').hide();
+
+                //show edit button
+                tbl_row.find('.btn_edit_u').show();
+
+                tbl_row.find('.row_data_u')
+                .attr('edit_type', 'click')
+                .removeClass('bg-warning')
+                .css('padding','')
+
+                var arr = {};
+                tbl_row.find('.row_data_u').each(function(index, val)
+                {
+                    var col_name_u = $(this).attr('col_name_u');
+                    var col_val_u  =  $(this).text();
+                    arr[col_name_u] = col_val_u;
+                });
+
+                //use the "arr"	object for your ajax call
+                $.extend(arr, {row_id_u:row_id_u});
+                myFunctionDeleteUser(arr);
+
+                //out put to show
+                $('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')
+
+            });
+        });
+    </script>
+    </section>
+     <!--Drug work-->
+        <section id="drugs_work">
+            <div class = "container">
+                <h1>Drug Work</h1>
+                <input class="form-control" id="search-drug" type="text" placeholder="Search..">
+                <button id="add_drug_btn" type="button" class="add_btn" data-toggle="modal" data-target="#add_drug_trigger">
+                    Add Drug
+                </button>
+                <!-- Modal Drug -->
+                <div class="modal fade" id="add_drug_trigger"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="static">Add new drug</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form [formGroup]="AddDrugGroup" (ngSubmit)="onSubmit()" id="add_drug_form" th:action="@{/add_drug_form}" method="post">
+                                    <div class="form-group row">
+                                        <label for="add_drug_name" class="col-sm-4 col-form-label">Drug's name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" formControlName="name" name="name" id="add_drug_name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_drug_description" class="col-sm-4 col-form-label">Description</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" formControlName="description" name="description" id="add_drug_description">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_drug_price" class="col-sm-4 col-form-label">Price</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" formControlName="price" name="price" id="add_drug_price">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="add_drug_quantity" class="col-sm-4 col-form-label">Quantity</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" formControlName="quantity" name="quantity" id="add_drug_quantity">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="submit_add_drug_form()" data-dismiss="modal">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Drug name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Modify</th>
+              </tr>
+              </thead>
+              <tbody id="drugs-table">
+              <tr th:each="drug : ${drugs}">
+                  <td><div class="row_data_d" edit_type="click" col_name_d="drug_id"><span th:text="${drug.id}" hidden></span></div></td>
+                  <td><div class="row_data_d" edit_type="click" col_name_d="drug_name"><span th:text="${drug.name}"> Name </span></div></td>
+                  <td><div class="row_data_d" edit_type="click" col_name_d="drug_description"><span th:text="${drug.description}" > Description </span></div></td>
+                  <td><div class="row_data_d" edit_type="click" col_name_d="drug_quantity"><span th:text="${drug.quantity}"> Quantity </span></div></td>
+                  <td><div class="row_data_d" edit_type="click" col_name_d="drug_price"><span th:text="${drug.price}"> Price </span></div></td>
+                  <td>
+                      <span class="btn_edit_d" > <a href="" class="btn btn-link " th:row_id_d="${drug.id}" > Edit</a> </span>
+
+                      <span class="btn_save_d" > <a href="" class="btn btn-link " th:row_id_d="${drug.id}" > Save</a> | </span>
+                      <span class="btn_delete_d" > <a href="" class="btn btn-link " th:row_id_d="${drug.id}" > Delete</a> | </span>
+                      <span class="btn_cancel_d" > <a href="" class="btn btn-link " th:row_id_d="${drug.id}" > Cancel</a></span>
+                  </td>
+              </tr>
+              </tbody>
+            </table>
+            </div>
+            <div style="display:none">
+                <form method="post" th:action="@{/edit_table_drug}" id="hidden_drugs">
+                    <input name="content" type="hidden" id="arr_drug_id" />
+                </form>
+            </div>
+            <div style="display:none">
+                <form method="post" th:action="@{/delete_table_drug}" id="hidden_drugs_delete">
+                    <input name="content" type="hidden" id="arr_drug_id_delete" />
+                </form>
+            </div>
+            <script th:inline="javascript">
+
+            function submit_add_drug_form(){
+                document.getElementById("add_drug_form").submit();
+            }
+
+             function myFunction2(myArray) {
+                   document.getElementById("arr_drug_id").value = JSON.stringify(myArray);
+                   document.getElementById("hidden_drugs").submit();
+            }
+            function myFunctionDeleteDrug(myArray) {
+                   document.getElementById("arr_drug_id_delete").value = JSON.stringify(myArray);
+                   document.getElementById("hidden_drugs_delete").submit();
+            }
+
+            $(document).find('.btn_save_d').hide();
+            $(document).find('.btn_delete_d').hide();
+            $(document).find('.btn_cancel_d').hide();
+
+            $(document).on('click','.row_data_d', function(event){
+                event.preventDefault();
+                if($(this).attr('edit_type') == 'button')
+                {
+                    return false;
+                }
+                $(this).closest('div').attr('contenteditable', 'true');
+                $(this).addClass('bg-warning').css('padding','5px');
+
+                $(this).focus();
+            });
+
+            $(document).on('click', '.btn_edit_d', function(event){
+                event.preventDefault();
+                var tbl_row = $(this).closest('tr');
+
+                var row_id_d = tbl_row.attr('row_data_d');
+
+                tbl_row.find('.btn_save_d').show();
+                tbl_row.find('.btn_cancel_d').show();
+                tbl_row.find('.btn_delete_d').show();
+
+                tbl_row.find('.btn_edit_d').hide();
+
+                tbl_row.find('.row_data_d')
+                .attr('contenteditable', 'true')
+                .attr('edit_type', 'button')
+                .addClass('bg-warning')
+                .css('padding','3px')
+
+                tbl_row.find('.row_data_d').each(function(index, val)
+                {
+                    $(this).attr('original_entry', $(this).html());
+                });
+
+                $(document).on('click', '.btn_cancel_d', function(event)
+                {
+                    event.preventDefault();
+
+                    var tbl_row = $(this).closest('tr');
+
+                    var row_id_d = tbl_row.attr('row_id_d');
+
+                    tbl_row.find('.btn_save_d').hide();
+                    tbl_row.find('.btn_cancel_d').hide();
+                    tbl_row.find('.btn_delete_d').hide();
+
+                    tbl_row.find('.btn_edit_d').show();
+
+                    tbl_row.find('.row_data_d')
+                    .attr('edit_type', 'click')
+                    .removeClass('bg-warning')
+                    .css('padding','')
+
+                    tbl_row.find('.row_data_d').each(function(index, val)
+                    {
+                        $(this).html( $(this).attr('original_entry') );
+                    });
+                });
+
+                $(document).on('click', '.btn_save_d', function(event)
+                {
+                    event.preventDefault();
+                    var tbl_row = $(this).closest('tr');
+
+                    var row_id_d = tbl_row.attr('row_id_d');
+
+                    tbl_row.find('.btn_save_d').hide();
+                    tbl_row.find('.btn_cancel_d').hide();
+                    tbl_row.find('.btn_delete_d').hide();
+
+                    //show edit button
+                    tbl_row.find('.btn_edit_d').show();
+
+                    tbl_row.find('.row_data_d')
+                    .attr('edit_type', 'click')
+                    .removeClass('bg-warning')
+                    .css('padding','')
+
+                    var arr = {};
+                    tbl_row.find('.row_data_d').each(function(index, val)
+                    {
+                        var col_name_d = $(this).attr('col_name_d');
+                        var col_val_d  =  $(this).text();
+                        arr[col_name_d] = col_val_d;
+                    });
+
+                    //use the "arr"	object for your ajax call
+                    $.extend(arr, {row_id_d:row_id_d});
+                    myFunction2(arr);
+
+                    //out put to show
+                    $('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')
+
+                });
+
+                $(document).on('click', '.btn_delete_d', function(event)
+                {
+                    event.preventDefault();
+                    var tbl_row = $(this).closest('tr');
+
+                    var row_id_d = tbl_row.attr('row_id_d');
+
+                    tbl_row.find('.btn_save_d').hide();
+                    tbl_row.find('.btn_cancel_d').hide();
+                    tbl_row.find('.btn_delete_d').hide();
+
+                    //show edit button
+                    tbl_row.find('.btn_edit_d').show();
+
+                    tbl_row.find('.row_data_d')
+                    .attr('edit_type', 'click')
+                    .removeClass('bg-warning')
+                    .css('padding','')
+
+                    var arr = {};
+                    tbl_row.find('.row_data_d').each(function(index, val)
+                    {
+                        var col_name_d = $(this).attr('col_name_d');
+                        var col_val_d  =  $(this).text();
+                        arr[col_name_d] = col_val_d;
+                    });
+
+                    //use the "arr"	object for your ajax call
+                    $.extend(arr, {row_id_d:row_id_d});
+                    myFunctionDeleteDrug(arr);
+
+                    //out put to show
+                    $('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')
+
+                });
+            });
+    </script>
+    </section>
+    	<!-- Scripts used only in this page -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("#search-user").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#users-table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+ </script>   
+    <script>
+    $(document).ready(function(){
+      $("#search-drug").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#drugs-table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+ </script>
+<section id="generate_report_section">
+    <h1>Generate report</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form id="report_csv_generate" th:action="@{/report_csv}" method="post">
+            <button id="generate_csv" type="submit" class="style_btn_report"  mode="post"  >
+                Generate drug report csv
+            </button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <button id="bank_account" type="button" class="style_btn_report" data-toggle="modal" data-target="#bankAccountForm">
+            Bank account
+        </button>
+        <!-- Modal Bank -->
+        <div class="modal fade" id="bankAccountForm" data-backdrop="staticA" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticA">Bank Account</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form [formGroup]="bankAccountFormGroup" id="bank_account_form" th:action="@{/edit_bank_account_admin}" method="post" (ngSubmit)="onSubmit()">
+                            <input type="hidden" th:value="${user.id}" name="id"/>
+                            <div class="form-group row">
+                                <label for="add_account_number" class="col-sm-4 col-form-label" >Account number</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" th:value="${bank_account.account_number}" name="account_number" formControlName="account_number" id="add_account_number">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="add_security_number" class="col-sm-4 col-form-label">Security number</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" th:value="${bank_account.security_number}" name="security_number" formControlName="security_number" id="add_security_number">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="add_amount" class="col-sm-4 col-form-label">Amount</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" th:value="${bank_account.amount}" name="amount" formControlName="amount" id="add_amount">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="submit_bank_account_form()" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <form id="report_pdf_generate"  th:action="@{/report_pdf}" method="post">
+            <button id="generate_pdf" type="submit" class="style_btn_report" >
+                Generate drug report txt
+            </button>
+        </form>
+    </div>
+
+
+</div>
+
+</section>
+</body>
+    
+</html>

@@ -1,0 +1,70 @@
+plugins {
+	id "net.ltgt.apt" version "0.15"
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.asignment3'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+
+sourceSets {
+	main {
+		java {
+			srcDir "${buildDir.absolutePath}/generated/source/apt/main"
+		}
+	}
+}
+
+tasks.withType(JavaCompile) {
+	options.compilerArgs = [
+			'-Amapstruct.defaultComponentModel=spring',
+			'-Amapstruct.unmappedTargetPolicy=ERROR'
+	]
+
+	options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+	options.encoding = 'UTF-8'
+}
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.webjars', name: 'bootstrap', version: '4.1.3'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+	compile group: 'com.opencsv', name: 'opencsv', version: '4.1'
+	compile files('mysql-connector-java-6.0.6.jar')
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile('org.mapstruct:mapstruct-jdk8:1.2.0.Final')
+	compile('org.mapstruct:mapstruct-processor:1.2.0.Final')
+	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}

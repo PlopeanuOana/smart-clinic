@@ -1,0 +1,164 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+#nav_bar
+{
+    position: sticky;
+    top:0;
+    z-index: 10;
+}
+
+.navbar-brand img
+{
+    height:40px;
+    padding-left: 30px;
+
+}
+.navbar-nav li
+{
+    padding: 0 10px;
+}
+
+.navbar-nav li
+{
+    float: right;
+    text-align: left;
+}
+
+#nav_bar ul li a
+{
+    color: white;
+}
+
+#nav_bar ul li a:hover
+{
+    color: black;
+}
+
+.navbar
+{
+    background: SkyBlue;
+}
+.navbar-toggler
+{
+    border: none!important;
+}
+.nav-link
+{
+    font-weight: 600;
+    font-size: 16px;
+}
+h1
+{
+    text-align: center;
+    color: #555!important;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+#profile{
+    padding-top: 50px;
+    padding-bottom: 130px;
+}
+#edit_profile
+{
+    width: 85%;
+    padding: 6px 30px;
+    cursor: pointer;
+    display: block;
+    background: linear-gradient(to left, black, SkyBlue);
+    margin: 20px auto;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+#bank_account
+{
+    width: 85%;
+    padding: 6px 30px;
+    cursor: pointer;
+    display: block;
+    background: linear-gradient(to left, black, SkyBlue);
+    margin: 20px auto;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+.profile-group
+{
+    top: 60px;
+    left: 150px;
+    position: absolute;
+    width: 150px;
+    transition: .5s;
+    
+}
+.user-field
+{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 100px;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid skyblue;
+    outline: none;
+    font-weight: bold;
+    background: transparent; 
+    color: skyblue;
+}
+.profile-group-content
+{
+    top: 60px;
+    left: 10px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+.content-field
+{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 10px;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;  
+}
+
+#appointments
+{
+    padding-top: 120px;
+    padding-bottom: 150px;
+}
+
+#make_appointment
+{
+    padding-top: 150px;
+    padding-bottom: 50px;
+}
+
+
+#make_appointment_btn
+{
+    width: 30%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    background: linear-gradient(to left, black, SkyBlue);
+    margin: 20px auto;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+#doctor_id
+{
+    width: 30%;
+}
+
+
