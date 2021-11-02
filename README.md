@@ -1,4 +1,4 @@
-# SmartClinic-PS
+# Smart-Clinic
 1. clone
 2. import as project
 3. run
